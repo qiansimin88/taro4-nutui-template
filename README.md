@@ -1,0 +1,347 @@
+# Taro 4 + NutUI 多端小程序开发模板
+
+<p align="center">
+  <b>🚀 开箱即用的 Taro 4 小程序开发模板</b>
+</p>
+
+<p align="center">
+  基于 <b>Taro 4</b> + <b>React 18</b> + <b>NutUI</b> 的现代化多端小程序开发模板，集成了最佳实践和常用工具库。
+</p>
+
+---
+
+## 特性亮点
+
+### 📦 开箱即用
+
+- ✅ 完整的项目结构和配置
+- ✅ 集成了所有常用工具库
+- ✅ 详细的使用文档和示例
+
+### 🎨 现代化技术栈
+
+- ✨ Taro 4 + React 18 + TypeScript
+- 🎨 NutUI React + Tailwind CSS 4
+- 📦 Zustand 状态管理 + 持久化
+- 🔄 ahooks useRequest 请求管理
+- ✅ React Hook Form + Zod 表单验证
+
+### 🔧 开发工具
+
+- 🛠️ ESLint + EditorConfig 代码规范
+- 🐛 vConsole H5 调试工具
+- 🎯 环境配置分离（dev/prod）
+
+---
+
+## 技术栈
+
+| 类别     | 技术                  | 版本           |
+| -------- | --------------------- | -------------- |
+| 框架     | Taro                  | 4.1.10         |
+| UI 框架  | React                 | 18.x           |
+| 组件库   | NutUI React           | 3.0.18         |
+| 状态管理 | Zustand               | 5.0.10         |
+| 请求管理 | ahooks (useRequest)   | 3.9.6          |
+| 表单验证 | React Hook Form + Zod | 7.71.1 / 4.3.6 |
+| 样式方案 | Sass + Tailwind CSS   | 1.60 / 4.1.18  |
+| 构建工具 | Vite                  | 4.2.0          |
+| 语言     | TypeScript            | 5.1.0          |
+
+## 支持平台
+
+- 微信小程序
+- H5
+- 支付宝小程序
+- 百度小程序
+- 字节跳动小程序
+- QQ 小程序
+- 京东小程序
+
+## 快速开始
+
+### 1. 克隆/使用模板
+
+```bash
+# 克隆项目
+git clone <your-template-repo-url>
+cd taro4-nutui-template
+
+# 安装依赖
+pnpm install
+```
+
+### 2. 配置环境变量
+
+```bash
+# 复制环境变量示例文件
+cp .env.example .env.development
+
+# 编辑 .env.development 文件，填入实际的 API 地址
+TARO_APP_API_URL=https://your-api.example.com
+```
+
+### 3. 修改项目信息
+
+```bash
+# 修改 package.json 中的项目名称和描述
+{
+  "name": "your-project-name",
+  "description": "Your project description"
+}
+
+# 修改 config/index.ts 中的项目名
+projectName: "your-project-name"
+```
+
+### 4. 启动开发
+
+```bash
+# 开发模式（微信小程序）
+pnpm dev:weapp
+
+# 开发模式（H5）
+pnpm dev:h5
+
+# 生产构建（微信小程序）
+pnpm build:weapp
+```
+
+## 项目结构
+
+```
+src/
+├── assets/          # 静态资源
+├── components/      # 公共组件
+├── config/          # 配置文件
+├── constants/       # 常量定义
+├── hooks/           # 自定义 Hooks
+├── pages/           # 页面
+├── schemas/         # Zod 验证规则
+├── services/        # API 服务层
+├── store/           # Zustand 状态管理
+├── styles/          # 全局样式
+├── types/           # TypeScript 类型
+└── utils/           # 工具函数
+```
+
+---
+
+## 核心工具使用规范
+
+### 1. 请求管理 (useRequest)
+
+项目使用 `ahooks` 的 `useRequest` 配合 `request.ts` 进行请求管理。
+
+**核心特性：**
+
+- 自动处理 Loading 状态
+- 统一错误处理和 Toast 提示
+- 401 自动跳转登录
+- 支持防抖、节流、轮询、缓存、重试
+
+**基础用法：**
+
+```typescript
+import { useRequest } from "@/hooks";
+import { userService } from "@/services/user";
+
+// 自动请求
+const { data, loading } = useRequest(userService.getProfile);
+
+// 手动请求
+const { run } = useRequest(userService.updateProfile, {
+  manual: true,
+  throttleWait: 1000, // 防止重复提交
+  onSuccess: () => {
+    /* 成功回调 */
+  },
+});
+```
+
+**常用配置：**
+
+- `manual: true` - 手动触发
+- `debounceWait: 300` - 搜索防抖
+- `throttleWait: 1000` - 提交节流
+- `pollingInterval: 3000` - 轮询
+- `cacheKey: 'xxx'` - 缓存
+- `retryCount: 3` - 失败重试
+
+> 详细文档：[docs/useRequest 使用指南.md](./docs/useRequest使用指南.md)
+
+---
+
+### 2. 表单验证 (React Hook Form + Zod)
+
+使用 `react-hook-form` 处理表单逻辑，`zod` 进行数据验证。
+
+**基础用法：**
+
+```typescript
+// 1. 定义 Schema (src/schemas/user.ts)
+import { z } from "zod";
+
+export const loginSchema = z.object({
+  username: z.string().min(2, "用户名至少2个字符"),
+  password: z.string().min(6, "密码至少6位"),
+});
+
+export type LoginInput = z.infer<typeof loginSchema>;
+
+// 2. 在组件中使用
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const {
+  control,
+  handleSubmit,
+  formState: { errors },
+} = useForm<LoginInput>({
+  resolver: zodResolver(loginSchema),
+});
+```
+
+**最佳实践：**
+
+- Schema 统一存放在 `src/schemas/` 目录
+- 使用 `z.infer` 导出类型复用
+- 通过 `formState.errors` 展示错误信息
+
+> 详细文档：[docs/表单验证指南(React-Hook-Form+Zod).md](<./docs/表单验证指南(React-Hook-Form+Zod).md>)
+
+---
+
+### 3. 状态管理 (Zustand)
+
+轻量级状态管理，支持小程序 Storage 持久化。
+
+**基础用法：**
+
+```typescript
+// 使用 Store
+import { useUserStore, selectIsLogin } from "@/store";
+
+function Component() {
+  const isLogin = useUserStore(selectIsLogin);
+  const { login, logout } = useUserStore();
+}
+```
+
+**已有 Store：**
+
+- `useUserStore` - 用户状态（登录、token、用户信息）
+- `useAppStore` - 应用状态（主题、语言、系统信息）
+
+---
+
+### 4. 调试工具 (vConsole)
+
+H5 端调试工具，仅在开发环境启用。
+
+```typescript
+// src/app.ts
+import VConsole from "vconsole";
+
+if (process.env.NODE_ENV === "development") {
+  new VConsole();
+}
+```
+
+**小程序调试：**
+
+```typescript
+import Taro from "@tarojs/taro";
+
+// 开启小程序调试面板
+Taro.setEnableDebug({ enableDebug: true });
+```
+
+> 详细文档：[docs/调试工具指南(vConsole).md](<./docs/调试工具指南(vConsole).md>)
+
+---
+
+### 5. 样式方案 (Tailwind CSS)
+
+项目集成了 `weapp-tailwindcss`，支持在小程序中使用 Tailwind CSS。
+
+```tsx
+<View className="flex items-center justify-between p-4 bg-white">
+  <Text className="text-lg font-bold text-gray-800">标题</Text>
+</View>
+```
+
+---
+
+## 开发规范
+
+### 文件命名
+
+- 组件：大驼峰 `UserProfile.tsx`
+- 工具/服务：小驼峰 `userService.ts`
+- 常量：全大写 `API_BASE_URL`
+
+### 注释规范
+
+- 所有注释使用中文
+- 复杂逻辑需添加说明
+
+### 代码提交
+
+```
+feat: 新功能
+fix: 修复 Bug
+docs: 文档更新
+style: 代码格式调整
+refactor: 重构
+```
+
+---
+
+## 常用命令
+
+| 命令               | 说明               |
+| ------------------ | ------------------ |
+| `pnpm dev:weapp`   | 微信小程序开发模式 |
+| `pnpm dev:h5`      | H5 开发模式        |
+| `pnpm build:weapp` | 微信小程序生产构建 |
+| `pnpm build:h5`    | H5 生产构建        |
+
+---
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request！
+
+### 流程
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交修改 (`git commit -m 'feat: Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 发起 Pull Request
+
+---
+
+## 许可证
+
+MIT License - 详见 [LICENSE](./LICENSE) 文件
+
+---
+
+## 相关资源
+
+- [Taro 官方文档](https://taro-docs.jd.com/)
+- [React 官方文档](https://react.dev/)
+- [NutUI React 文档](https://nutui.jd.com/react/)
+- [Tailwind CSS 文档](https://tailwindcss.com/)
+- [Zustand 文档](https://zustand-demo.pmnd.rs/)
+- [ahooks 文档](https://ahooks.js.org/)
+- [React Hook Form 文档](https://react-hook-form.com/)
+- [Zod 文档](https://zod.dev/)
+
+---
+
+<p align="center">
+  Made with ❤️ by Taro Community
+</p>

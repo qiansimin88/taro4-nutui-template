@@ -1,0 +1,54 @@
+/**
+ * TypeScript 编译配置文件
+ * 定义项目的 TypeScript 编译选项、路径别名和类型检查规则
+ */
+{
+  "compilerOptions": {
+    // 编译目标 ES 版本
+    "target": "es2017",
+    // 模块系统：commonjs（适用于 Node.js 和小程序环境）
+    "module": "commonjs",
+    // 保留注释（不移除）
+    "removeComments": false,
+    // 保留 const 和 enum 声明
+    "preserveConstEnums": true,
+    // 模块解析策略：node（模仿 Node.js 的模块解析）
+    "moduleResolution": "node",
+    // 启用装饰器语法（实验性）
+    "experimentalDecorators": true,
+    // 允许隐式 any 类型
+    "noImplicitAny": false,
+    // 允许默认导入没有默认导出的模块
+    "allowSyntheticDefaultImports": true,
+    // 输出目录
+    "outDir": "lib",
+    // 检查未使用的局部变量
+    "noUnusedLocals": true,
+    // 检查未使用的函数参数
+    "noUnusedParameters": true,
+    // 启用严格的 null 检查
+    "strictNullChecks": true,
+    // 生成 source map 文件（用于调试）
+    "sourceMap": true,
+    // 路径解析的基础目录
+    "baseUrl": ".",
+    // 路径别名映射
+    "paths": {
+      "@/*": ["src/*"] // @/ 映射到 src/ 目录
+    },
+    // 项目根目录
+    "rootDir": ".",
+    // JSX 编译模式：react-jsx（React 17+ 新 JSX 转换）
+    "jsx": "react-jsx",
+    // 允许编译 JS 文件
+    "allowJs": true,
+    // 允许导入 JSON 文件作为模块
+    "resolveJsonModule": true,
+    // 类型声明文件的查找目录
+    "typeRoots": ["node_modules/@types"]
+  },
+  // 需要编译的文件目录
+  "include": ["./src", "./types"],
+  // 保存时不自动编译
+  "compileOnSave": false
+}

@@ -1,0 +1,171 @@
+@use "sass:math";
+
+// ============================================
+// Flexbox Mixins
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================
+// Text Mixins
+// ============================================
+
+// Single line ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Multi-line ellipsis
+@mixin ellipsis-multi($lines: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ============================================
+// Size Mixins
+// ============================================
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($size) {
+  @include size($size, $size);
+}
+
+@mixin circle($size) {
+  @include square($size);
+  border-radius: 50%;
+}
+
+// ============================================
+// Position Mixins
+// ============================================
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-full {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin fixed-full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// ============================================
+// Border Mixins
+// ============================================
+
+// 1px border (for retina screens)
+@mixin hairline($position: bottom, $color: #e8e8e8) {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    box-sizing: border-box;
+
+    @if $position == top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $color;
+    } @else if $position == bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $color;
+    } @else if $position == left {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: $color;
+    } @else if $position == right {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: $color;
+    } @else if $position == all {
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border: 1px solid $color;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+    }
+  }
+}
+
+// ============================================
+// Safe Area Mixins
+// ============================================
+
+// Bottom safe area padding
+@mixin safe-area-bottom($extra: 0) {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + #{$extra});
+  padding-bottom: calc(env(safe-area-inset-bottom) + #{$extra});
+}
+
+// Top safe area padding
+@mixin safe-area-top($extra: 0) {
+  padding-top: calc(constant(safe-area-inset-top) + #{$extra});
+  padding-top: calc(env(safe-area-inset-top) + #{$extra});
+}
+
+// ============================================
+// Clear Mixins
+// ============================================
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

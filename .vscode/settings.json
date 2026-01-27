@@ -1,0 +1,9 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "wxml": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.classAttributes": ["class", "className"]
+}
