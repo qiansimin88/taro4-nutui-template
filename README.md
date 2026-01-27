@@ -22,6 +22,7 @@
 
 - ✨ Taro 4 + React 18 + TypeScript
 - 🎨 NutUI React + Tailwind CSS 4
+- 🕹️ Iconify 图标系统（支持 1000+ 图标）
 - 📦 Zustand 状态管理 + 持久化
 - 🔄 ahooks useRequest 请求管理
 - ✅ React Hook Form + Zod 表单验证
@@ -45,6 +46,7 @@
 | 请求管理 | ahooks (useRequest)   | 3.9.6          |
 | 表单验证 | React Hook Form + Zod | 7.71.1 / 4.3.6 |
 | 样式方案 | Sass + Tailwind CSS   | 1.60 / 4.1.18  |
+| 图标系统 | Iconify + Lucide      | 1.9.0 / 1.2.87 |
 | 构建工具 | Vite                  | 4.2.0          |
 | 语言     | TypeScript            | 5.1.0          |
 
@@ -273,6 +275,62 @@ Taro.setEnableDebug({ enableDebug: true });
 
 ---
 
+### 6. 图标方案 (Iconify + Tailwind CSS)
+
+集成了 Iconify for Tailwind CSS，支持直接使用类名调用图标。
+
+**基本用法：**
+
+```tsx
+import { View } from "@tarojs/components";
+
+function MyComponent() {
+  return (
+    <View>
+      {/* 使用 Lucide 图标 */}
+      <View className="i-lucide-home text-2xl text-blue-600" />
+      <View className="i-lucide-user text-3xl text-gray-800" />
+      <View className="i-lucide-settings text-xl text-green-500" />
+    </View>
+  );
+}
+```
+
+**常用图标示例：**
+
+```tsx
+{/* 导航类 */}
+<View className="i-lucide-home text-2xl" />
+<View className="i-lucide-search text-2xl" />
+<View className="i-lucide-menu text-2xl" />
+
+{/* 状态类 */}
+<View className="i-lucide-check-circle text-xl text-green-500" />
+<View className="i-lucide-alert-circle text-xl text-orange-500" />
+<View className="i-lucide-x-circle text-xl text-red-500" />
+
+{/* 操作类 */}
+<View className="i-lucide-plus text-lg" />
+<View className="i-lucide-edit text-lg" />
+<View className="i-lucide-trash text-lg" />
+```
+
+**特性：**
+
+- ✅ 无需手动导入 - 直接使用类名即可
+- ✅ 智能提示 - 输入 `i-lucide-` 自动提示
+- ✅ 按需加载 - 只打包使用的图标
+- ✅ 海量图标 - 支持 Lucide 等多个图标集
+
+**图标资源：**
+
+- Lucide Icons: https://lucide.dev/icons/
+- Iconify 搜索: https://icon-sets.iconify.design/
+
+> 详细文档：[docs/图标使用指南(Iconify+TailwindCSS).md](<./docs/图标使用指南(Iconify+TailwindCSS).md>)
+
+---
+
 ## 开发规范
 
 ### 文件命名
@@ -331,6 +389,8 @@ MIT License - 详见 [LICENSE](./LICENSE) 文件
 
 ## 相关资源
 
+### 框架和库
+
 - [Taro 官方文档](https://taro-docs.jd.com/)
 - [React 官方文档](https://react.dev/)
 - [NutUI React 文档](https://nutui.jd.com/react/)
@@ -339,6 +399,20 @@ MIT License - 详见 [LICENSE](./LICENSE) 文件
 - [ahooks 文档](https://ahooks.js.org/)
 - [React Hook Form 文档](https://react-hook-form.com/)
 - [Zod 文档](https://zod.dev/)
+
+### 图标资源
+
+- [Iconify 官网](https://iconify.design/)
+- [Lucide Icons](https://lucide.dev/)
+- [Iconify 图标搜索](https://icon-sets.iconify.design/)
+
+### 项目文档
+
+- [useRequest 使用指南](./docs/useRequest使用指南.md)
+- [表单验证指南](<./docs/表单验证指南(React-Hook-Form+Zod).md>)
+- [调试工具指南](<./docs/调试工具指南(vConsole).md>)
+- [图标使用指南](<./docs/图标使用指南(Iconify+TailwindCSS).md>)
+- [Zustand 状态管理使用指南](./docs/Zustand状态管理使用指南.md)
 
 ---
 

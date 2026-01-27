@@ -21,7 +21,8 @@ function Index() {
           <View className="w-full max-w-md text-center">
             {/* Logo/Icon */}
             <View className="mb-8">
-              <Text className="text-6xl">🚀</Text>
+              {/* 使用 Iconify 图标 */}
+              <View className="i-lucide-rocket text-6xl text-blue-600" />
             </View>
 
             {/* Title */}
@@ -35,16 +36,20 @@ function Index() {
             {/* Features */}
             <View className="mt-8 space-y-3">
               <View className="flex items-center justify-center gap-2">
-                <Text className="text-sm text-slate-500">✨ React 18 + TypeScript</Text>
+                <View className="i-lucide-sparkles text-lg text-yellow-500" />
+                <Text className="text-sm text-slate-500">React 18 + TypeScript</Text>
               </View>
               <View className="flex items-center justify-center gap-2">
-                <Text className="text-sm text-slate-500">🎨 NutUI + Tailwind CSS</Text>
+                <View className="i-lucide-palette text-lg text-purple-500" />
+                <Text className="text-sm text-slate-500">NutUI + Tailwind CSS</Text>
               </View>
               <View className="flex items-center justify-center gap-2">
-                <Text className="text-sm text-slate-500">📦 Zustand + useRequest</Text>
+                <View className="i-lucide-package text-lg text-green-500" />
+                <Text className="text-sm text-slate-500">Zustand + useRequest</Text>
               </View>
               <View className="flex items-center justify-center gap-2">
-                <Text className="text-sm text-slate-500">✅ React Hook Form + Zod</Text>
+                <View className="i-lucide-check-circle text-lg text-blue-500" />
+                <Text className="text-sm text-slate-500">React Hook Form + Zod</Text>
               </View>
             </View>
 

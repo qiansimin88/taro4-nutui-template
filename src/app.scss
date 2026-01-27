@@ -7,6 +7,8 @@
 
 /* 导入 Tailwind CSS */
 @import "tailwindcss";
+/* 添加下面这一行，路径为你创建的 tailwind.config.js 文件路径 */
+@config "../tailwind.config.js";
 
 /* 声明模板扫描路径，确保原子类能被收集 */
 @source "../src/**/*.{tsx,jsx,wxml}" not "../dist/**" not "**/node_modules/**";
