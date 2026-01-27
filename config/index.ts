@@ -58,7 +58,7 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
                 tailwindcss({
                   //在生产环境下构建时，Tailwind CSS 将不会自动校准单位（例如保持 PX 为大写），这对于 Taro 中需要区分 px 和 PX（防止被 pxtransform 转换）的场景非常重要。
                   optimize: false,
-                })
+                }),
               );
             }
           },
@@ -74,8 +74,13 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
         }),
       ],
     },
+    // Sass 配置
     sass: {
-      data: `@use "@nutui/nutui-react-taro/dist/styles/variables.scss" as *;\n`,
+      // 全局注入样式变量和 mixins
+      data: `@use "@nutui/nutui-react-taro/dist/styles/variables.scss" as *;
+              @use "src/styles/variables.scss" as *;
+              @use "src/styles/mixins.scss" as *;
+              `,
     },
     mini: {
       postcss: {
