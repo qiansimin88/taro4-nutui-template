@@ -1,7 +1,19 @@
 {
   "libVersion": "3.14.0",
-  "projectname": "joykings3d-mini",
-  "condition": {},
+  "projectname": "mini",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "开发-登录页",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": 1001
+        }
+      ]
+    }
+  },
   "setting": {
     "urlCheck": true,
     "coverView": true,

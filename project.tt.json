@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./",
-  "projectname": "joykings3d-mini",
-  "description": "金石星链小程序",
+  "projectname": "mini",
+  "description": "小程序",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,

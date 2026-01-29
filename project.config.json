@@ -1,13 +1,14 @@
 {
   "miniprogramRoot": "dist/",
-  "projectname": "joykings3d-mini",
-  "description": "金石星链小程序",
-  "appid": "wxe29dddb4a8c6e1d4",
+  "projectname": "taro4template",
+  "description": "小程序",
+  "appid": "",
   "setting": {
     "urlCheck": true,
     "es6": false,
     "enhance": false,
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
+    "useStaticServer": true,
     "postcss": false,
     "preloadBackgroundData": false,
     "minified": false,
@@ -27,7 +28,7 @@
     "localPlugins": false,
     "disableUseStrict": false,
     "useCompilerPlugins": false,
-    "condition": false,
+    "condition": true,
     "swc": false,
     "disableSWC": true,
     "babelSetting": {
@@ -39,10 +40,23 @@
   "compileType": "miniprogram",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "condition": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "开发-登录页",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": 1001
+        }
+      ]
+    }
+  },
   "packOptions": {
     "ignore": [],
     "include": []
   },
-  "editorSetting": {}
+  "editorSetting": {},
+  "libVersion": "3.14.0"
 }
