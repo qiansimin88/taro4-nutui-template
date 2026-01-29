@@ -10,6 +10,20 @@
 /* 添加下面这一行，路径为你创建的 tailwind.config.js 文件路径 */
 @config "../tailwind.config.js";
 
+/**
+ * 禁用 P3 广色域颜色
+ *
+ * 微信小程序的 WXSS 解析器不支持嵌套的 @supports 和 @media (color-gamut: p3) 规则
+ * Tailwind CSS v4 默认会生成这些规则来支持 P3 广色域显示
+ *
+ * 报错示例：./app-origin.wxss(7:59052): error at token `:`
+ *
+ * 解决方案：设置 --color-* 变量为 static，禁用动态 P3 颜色切换
+ */
+@theme static {
+  /* 使用静态主题，不生成 color-gamut 媒体查询 */
+}
+
 /* 声明模板扫描路径，确保原子类能被收集 */
 @source "../src/**/*.{tsx,jsx,wxml}" not "../dist/**" not "**/node_modules/**";
 
@@ -21,6 +35,8 @@
  * 效果：显示蓝色虚线边框，用于可视化调试组件布局
  */
 @utility debug {
-  outline: 1px dashed rgba(24, 144, 255, 0.6); /* 蓝色虚线边框 */
-  outline-offset: -1px; /* 边框向内偏移，不影响布局 */
+  outline: 1px dashed rgba(24, 144, 255, 0.6);
+  /* 蓝色虚线边框 */
+  outline-offset: -1px;
+  /* 边框向内偏移，不影响布局 */
 }
