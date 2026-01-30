@@ -4,6 +4,8 @@
  * 对应小程序的 app.json 配置
  */
 export default defineAppConfig({
+  lazyCodeLoading: "requiredComponents", // 开启按需注入
+
   // 页面路由列表（数组第一项为首页）
   pages: [
     "pages/test1/index",
