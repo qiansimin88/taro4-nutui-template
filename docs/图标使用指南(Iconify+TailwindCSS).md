@@ -222,7 +222,7 @@ function ActionButtons() {
 ```tsx
 function FeatureList() {
   return (
-    <View className="space-y-3">
+    <View className="flex flex-col gap-3">
       <View className="flex items-center gap-2">
         <View className="i-lucide-check-circle text-xl text-green-500" />
         <Text>功能已启用</Text>

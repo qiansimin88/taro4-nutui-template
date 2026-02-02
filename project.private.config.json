@@ -1,11 +1,24 @@
 {
   "libVersion": "3.14.0",
-  "projectname": "mini",
+  "projectname": "joykings3d-mini",
   "condition": {
     "miniprogram": {
       "list": [
         {
-          "id": 0,
+          "name": "个人中心",
+          "pathName": "pages/personalCenter/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "安全设置",
+          "pathName": "sub-packages/security/settings/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": 1001
+        },
+        {
           "name": "开发-登录页",
           "pathName": "pages/login/index",
           "query": "",
@@ -15,7 +28,7 @@
     }
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "coverView": true,
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": false,

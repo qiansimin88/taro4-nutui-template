@@ -131,6 +131,69 @@ src/
 
 ## 核心工具使用规范
 
+### 1. 登录鉴权 (AuthButton + useAuth Hook)
+
+项目采用**静默登录 + 分层鉴权**架构，无需独立登录页即可完成用户认证。
+
+**核心特点**：
+
+- 老用户自动登录，无感知
+- 新用户在操作时触发手机号授权
+- 分层设计：按钮用组件，非按钮用 Hook
+- 灵活应对各种鉴权场景
+
+#### 按钮场景：使用 AuthButton 组件
+
+直接在当前页授权，无跳转，体验流畅：
+
+```tsx
+import { AuthButton } from "@/components";
+
+function ProductDetail() {
+  const handleBuy = () => {
+    // 已登录才会执行
+    console.log("购买商品");
+  };
+
+  return <AuthButton onClick={handleBuy}>立即购买</AuthButton>;
+}
+```
+
+#### 非按钮场景：使用 useAuth Hook
+
+适用于图片、List Item、View 等非按钮元素：
+
+```tsx
+import { useAuth } from '@/hooks';
+import { Image } from '@tarojs/components';
+
+function Gallery() {
+  const { checkAuth } = useAuth();
+
+  const handleImageClick = async () => {
+    await checkAuth(() => {
+      // 登录后执行的业务逻辑
+      Taro.previewImage({ urls: [...] });
+    });
+  };
+
+  return <Image onClick={handleImageClick} src="..." />;
+}
+```
+
+**工作流程**：
+
+```
+按钮场景：
+  点击按钮 → AuthButton 检测未登录 → 弹出手机号授权 → 授权成功 → 执行回调
+
+非按钮场景：
+  点击元素 → checkAuth 检测未登录 → 提示弹窗 → 跳转登录页 →
+  用户使用 AuthButton 授权 → 返回原页面
+```
+
+> 详细文档：[docs/登录鉴权架构指南.md](./docs/登录鉴权架构指南.md)
+
 ### 1. 请求管理 (useRequest)
 
 项目使用 `ahooks` 的 `useRequest` 配合 `request.ts` 进行请求管理。
@@ -266,6 +329,10 @@ Taro.setEnableDebug({ enableDebug: true });
 ### 5. 样式方案 (Tailwind CSS)
 
 项目集成了 `weapp-tailwindcss`，支持在小程序中使用 Tailwind CSS。
+
+> [!IMPORTANT] > **⚠️ 禁用 `space-x/y` 工具类**：
+> 在微信小程序中，Tailwind CSS 的 `space-y-n` / `space-x-n` 会编译出含 `:where` 伪类的选择器，小程序 WXSS 编译器不支持该语法，会导致布局失效。
+> **必须统一使用 `flex flex-col gap-n` 或 `flex flex-row gap-n` 布局方式替代。**
 
 ```tsx
 <View className="flex items-center justify-between p-4 bg-white">
@@ -408,6 +475,7 @@ refactor: 重构
 
 ### 项目文档
 
+- [登录鉴权架构指南](./docs/登录鉴权架构指南.md)
 - [useRequest 使用指南](./docs/useRequest使用指南.md)
 - [表单验证指南](<./docs/表单验证指南(React-Hook-Form+Zod).md>)
 - [调试工具指南](<./docs/调试工具指南(vConsole).md>)

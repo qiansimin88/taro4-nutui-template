@@ -15,6 +15,9 @@ export { storage } from "./storage";
 // 路由导航工具
 export { nav } from "./nav";
 
+// 彩色日志工具
+export { log, logger } from "./logger";
+
 // 样式工具（clsx 类名合并）
 export { cn } from "./style";
 

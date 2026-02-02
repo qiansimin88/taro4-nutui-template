@@ -103,7 +103,7 @@ function Login() {
                 <View className="w-24 h-24 bg-white rounded-3xl shadow-lg flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
                     <View className="i-lucide-shopping-bag text-5xl text-blue-600" />
                 </View>
-                <Text className="text-2xl font-bold text-slate-800 tracking-wide mb-2">金石星链商城</Text>
+                <Text className="text-2xl font-bold text-slate-800 tracking-wide mb-2">-星链商城</Text>
                 <Text className="text-sm text-slate-500 font-medium tracking-widest uppercase">Creative 3D Print Store</Text>
             </View>
 

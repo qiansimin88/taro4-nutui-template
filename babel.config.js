@@ -23,8 +23,8 @@ module.exports = {
       "import", // babel-plugin-import 插件（按需导入）
       {
         libraryName: "@nutui/nutui-react-taro", // 库名
-        libraryDirectory: "dist/esm", // 模块目录
-        style: "css", // 自动导入样式：css
+        libraryDirectory: "dist/es/packages", // 修复：正确的模块目录
+        style: (name) => `${name}/style/css`, // 样式路径
         camel2DashComponentName: false, // 不转换组件名为短横线形式
       },
       "nutui-react-taro", // 插件别名
